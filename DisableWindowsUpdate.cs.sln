@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisableWindowsUpdate.cs", "DisableWindowsUpdate.cs\DisableWindowsUpdate.cs.csproj", "{0ED33942-E66A-4C4B-A415-D1F75201C355}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D9F5435-B97A-4200-9A8E-73DD40048B68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0ED33942-E66A-4C4B-A415-D1F75201C355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ED33942-E66A-4C4B-A415-D1F75201C355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ED33942-E66A-4C4B-A415-D1F75201C355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ED33942-E66A-4C4B-A415-D1F75201C355}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {283689B9-1709-4123-8D34-0CC49F249EF8}
+	EndGlobalSection
+EndGlobal
