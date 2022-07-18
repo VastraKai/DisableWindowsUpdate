@@ -1,1 +1,2 @@
-# DisableWindowsUpdate.cs
+# DisableWindowsUpdate
+### Disables or Enables windows update.
