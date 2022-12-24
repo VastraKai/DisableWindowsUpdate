@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Diagnostics;
 
-public class WUP
+public static class WUP
 {
-    public Logging l = new Logging();
-    public Util util = new Util();
-    public string RegExe = Environment.ExpandEnvironmentVariables("%systemroot%") + "\\system32\\reg.exe";
-    public string CmdExe = Environment.ExpandEnvironmentVariables("%systemroot%") + "\\system32\\cmd.exe";
+    /// <summary>
+    /// The path to reg.exe in the current environment.
+    /// </summary>
+    public static string RegExe = Environment.ExpandEnvironmentVariables("%systemroot%") + "\\system32\\reg.exe";
+    /// <summary>
+    /// The path to cmd.exe in the current environment.
+    /// </summary>
+    public static string CmdExe = Environment.ExpandEnvironmentVariables("%systemroot%") + "\\system32\\cmd.exe";
     /// <summary>
     /// Checks if RegExe file exists
     /// </summary>
     /// <returns>If RegExe exists</returns>
-    public bool CheckReg()
+    public static bool CheckReg()
     {
         try
         {
@@ -29,17 +33,17 @@ public class WUP
     /// <summary>
     /// Disables Windows update.
     /// </summary>
-	public void Disable()
+	public static void Disable()
     {
         int ErrorCode = 0;
         Console.WriteLine("Tweaking the registry...\n");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /v AUOptions /t REG_DWORD /d 2 /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /v UseWUServer /t REG_DWORD /d 1 /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v DoNotConnectToWindowsUpdateInternetLocations /t REG_DWORD /d 1 /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUStatusServer /t REG_SZ /d localserver.localdomain.wsus /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUServer /t REG_SZ /d localserver.localdomain.wsus /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v UpdateServiceUrlAlternate /t REG_SZ /d wsus.localdomain.localserver /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /v AUOptions /t REG_DWORD /d 2 /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /v UseWUServer /t REG_DWORD /d 1 /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v DoNotConnectToWindowsUpdateInternetLocations /t REG_DWORD /d 1 /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUStatusServer /t REG_SZ /d localserver.localdomain.wsus /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUServer /t REG_SZ /d localserver.localdomain.wsus /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} add HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v UpdateServiceUrlAlternate /t REG_SZ /d wsus.localdomain.localserver /f");
         if (ErrorCode == 0)
         {
             Console.WriteLine("Windows Update has been disabled.");
@@ -53,15 +57,15 @@ public class WUP
     /// <summary>
     /// Enables Windows update.
     /// </summary>
-    public void Enable()
+    public static void Enable()
     {
         int ErrorCode = 0;
         Console.WriteLine("Tweaking the registry...");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v DoNotConnectToWindowsUpdateInternetLocations /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUStatusServer /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUServer /f");
-        ErrorCode = ErrorCode + util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v UpdateServiceUrlAlternate /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v DoNotConnectToWindowsUpdateInternetLocations /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUStatusServer /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUServer /f");
+        ErrorCode = ErrorCode + Util.ProcessStart(CmdExe, $"/c {RegExe} delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v UpdateServiceUrlAlternate /f");
         if(ErrorCode == 0)
         {
             Console.WriteLine("Windows Update has been enabled.");
@@ -75,21 +79,4 @@ public class WUP
     }
 }
 
-/*
-// enable windows update
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /f
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v AUOptions /f
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v UseWUServer /f
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v DoNotConnectToWindowsUpdateInternetLocations /f
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v WUStatusServer /f
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v WUServer /f
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v UpdateServiceUrlAlternate /f
-// disable windows update
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /f
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v AUOptions /t REG_DWORD /d 2 /f
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v UseWUServer /t REG_DWORD /d 1 /f
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v DoNotConnectToWindowsUpdateInternetLocations /t REG_DWORD /d 1 /f
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v WUStatusServer /t REG_SZ /d localserver.localdomain.wsus /f
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v WUServer /t REG_SZ /d localserver.localdomain.wsus /f
-reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v UpdateServiceUrlAlternate /t REG_SZ /d wsus.localdomain.localserver /f
-*/
+

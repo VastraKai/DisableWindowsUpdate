@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class Util
+public static class Util
 {
-    public int ProcessStart(string file, string args)
+    public static int ProcessStart(string file, string args)
     {
         
         try
@@ -38,7 +38,7 @@ public class Util
             return proc.ExitCode;
         } catch (Exception ex)
         {
-            new Logging().logWrite("" + ex, 15);
+            Console.WriteLine("" + ex, 15);
             return 1;
         }
     }

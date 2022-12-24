@@ -4,8 +4,6 @@ using System.Diagnostics;
 
 public class Program
 {
-    public Logging l = new Logging();
-    public WUP wUP = new WUP();
     static void Main(string[] args)
     {
         new Program().RealMain(args);
@@ -25,26 +23,28 @@ public class Program
                 if (key.KeyChar.ToString().ToLower() == "1")
                 {
                     Console.Write("1\n");
-                    wUP.Enable();
+                    WUP.Enable();
                 }
                 else if (key.KeyChar.ToString().ToLower() == "2")
                 {
                     Console.Write("2\n");
-                    wUP.Disable();
+                    WUP.Disable();
                 }
                 else goto repeat;
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey(true);
             }
             else if (args[0].ToLower().Contains("--enable"))
             {
-                wUP.Enable();
+                WUP.Enable();
             }
             else if (args[0].ToLower().Contains("--disable"))
             {
-                wUP.Disable();
+                WUP.Disable();
             }
         } catch(Exception ex)
         {
-            l.logWrite("" + ex, 10, "INFO");
+            Console.WriteLine(ex);
         }
     }
 }
