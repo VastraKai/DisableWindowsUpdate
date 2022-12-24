@@ -34,13 +34,23 @@ public class Program
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey(true);
             }
-            else if (args[0].ToLower().Contains("--enable"))
+            else if (args[0].ToLower().StartsWith("-e"))
             {
                 WUP.Enable();
             }
-            else if (args[0].ToLower().Contains("--disable"))
+            else if (args[0].ToLower().StartsWith("-d"))
             {
                 WUP.Disable();
+            }
+            else
+            {
+                Console.WriteLine("Invalid argument.");
+                Console.WriteLine("Usage: DisableWindowsUpdate.exe [-e|-d]");
+                // Wait for ten seconds if the variable cmdcmdline contains cmd /c
+                if (Environment.CommandLine.ToLower().Contains("cmd /c"))
+                {
+                    Thread.Sleep(10000 );
+                }
             }
         } catch(Exception ex)
         {
